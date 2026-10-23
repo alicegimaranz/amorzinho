@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para o André 💖</title>
+    <title>Quiz do Pai do Ano 👑</title>
     <style>
         * {
             box-sizing: border-box;
@@ -12,152 +12,128 @@
         }
 
         body {
-            background: linear-gradient(135deg, #ffe6f0 0%, #ffccd5 100%);
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
-            position: relative;
+            padding: 20px;
+            overflow-x: hidden;
         }
 
-        /* Corações de fundo caindo devagar */
-        .bg-heart {
-            position: absolute;
-            color: rgba(255, 105, 180, 0.25);
-            font-size: 20px;
-            user-select: none;
-            pointer-events: none;
-            animation: floatUp linear infinite;
-        }
-
-        @keyframes floatUp {
-            0% {
-                transform: translateY(105vh) scale(0.8) rotate(0deg);
-                opacity: 0;
-            }
-            20% {
-                opacity: 0.7;
-            }
-            100% {
-                transform: translateY(-10vh) scale(1.2) rotate(360deg);
-                opacity: 0;
-            }
-        }
-
-        /* Cartão principal */
-        .card {
-            background: rgba(255, 255, 255, 0.92);
+        .container {
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             border-radius: 24px;
             padding: 40px 30px;
-            box-shadow: 0 15px 35px rgba(214, 51, 132, 0.15),
+            box-shadow: 0 15px 35px rgba(25, 118, 210, 0.15),
                         0 5px 15px rgba(0, 0, 0, 0.05);
             text-align: center;
-            max-width: 460px;
-            width: 90%;
+            max-width: 500px;
+            width: 100%;
+            border: 2px solid rgba(255, 255, 255, 0.8);
             position: relative;
             z-index: 10;
-            border: 2px solid rgba(255, 255, 255, 0.8);
         }
 
-        .question {
-            color: #d63384;
-            font-size: 1.5rem;
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: #e0e0e0;
+            border-radius: 5px;
+            margin-bottom: 25px;
+            overflow: hidden;
+        }
+
+        .progress {
+            height: 100%;
+            width: 33%;
+            background: linear-gradient(90deg, #2196f3, #1e88e5);
+            transition: width 0.4s ease;
+        }
+
+        .question-title {
+            color: #1565c0;
+            font-size: 1.4rem;
             font-weight: 700;
+            margin-bottom: 30px;
             line-height: 1.4;
-            margin-bottom: 35px;
         }
 
-        /* Container de botões */
-        .btn-container {
+        .options-grid {
             display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 20px;
-            min-height: 80px;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .btn-option {
+            background: #ffffff;
+            border: 2px solid #90caf9;
+            color: #1976d2;
+            padding: 16px 20px;
+            border-radius: 16px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+        }
+
+        .btn-option:hover {
+            background: #2196f3;
+            color: white;
+            border-color: #2196f3;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(33, 150, 243, 0.3);
+        }
+
+        /* Certificado Final */
+        .certificate-card {
+            display: none;
+            background: #fffdf5;
+            border: 4px double #d4af37;
+            border-radius: 20px;
+            padding: 30px 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
             position: relative;
         }
 
-        .btn {
-            padding: 14px 32px;
-            font-size: 1.2rem;
-            font-weight: 700;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        .certificate-card::before {
+            content: "🏆";
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 10px;
         }
 
-        .btn-alice {
-            background: linear-gradient(135deg, #ff4081 0%, #e91e63 100%);
-            color: white;
-            z-index: 20;
+        .cert-title {
+            color: #b8860b;
+            font-size: 1.6rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 10px;
         }
 
-        .btn-alice:hover {
-            transform: scale(1.08);
-            box-shadow: 0 6px 20px rgba(233, 30, 99, 0.4);
+        .cert-name {
+            color: #1565c0;
+            font-size: 2rem;
+            font-weight: 800;
+            margin: 15px 0;
+            border-bottom: 2px solid #d4af37;
+            display: inline-block;
+            padding-bottom: 5px;
         }
 
-        .btn-andre {
-            background: #e0e0e0;
-            color: #555;
-            position: absolute;
-            transition: all 0.15s ease-out;
-            z-index: 25;
-            white-space: nowrap;
-        }
-
-        /* Modal da Vitória */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.4);
-            backdrop-filter: blur(5px);
-            justify-content: center;
-            align-items: center;
-            z-index: 100;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .modal.active {
-            display: flex;
-            opacity: 1;
-        }
-
-        .modal-content {
-            background: white;
-            padding: 40px 30px;
-            border-radius: 24px;
-            text-align: center;
-            max-width: 400px;
-            width: 85%;
-            transform: scale(0.8);
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            border: 3px solid #ff4081;
-        }
-
-        .modal.active .modal-content {
-            transform: scale(1);
-        }
-
-        .modal-text {
-            color: #d63384;
-            font-size: 1.5rem;
+        .cert-msg {
+            color: #424242;
+            font-size: 1.3rem;
             font-weight: 700;
             line-height: 1.4;
+            margin-top: 15px;
         }
 
-        /* Efeitos da Chuva de Confetes/Corações */
+        /* Partículas de Confetes */
         .particle {
             position: fixed;
             pointer-events: none;
@@ -179,104 +155,94 @@
 </head>
 <body>
 
-    <!-- Corações de fundo -->
-    <div id="bgHearts"></div>
-
-    <div class="card">
-        <h1 class="question">quem é a pessoa que mais ama, é mais carinhosa, mais engraçada e que está sempre certa?</h1>
-        
-        <div class="btn-container" id="btnContainer">
-            <button class="btn btn-alice" onclick="celebrate()">Alice</button>
-            <button class="btn btn-andre" id="btnAndre">André</button>
+    <div class="container" id="quizContainer">
+        <div class="progress-bar">
+            <div class="progress" id="progressBar"></div>
         </div>
+
+        <h2 class="question-title" id="questionTitle">Carregando pergunta...</h2>
+
+        <div class="options-grid" id="optionsGrid"></div>
     </div>
 
-    <!-- Tela Final / Modal de Vitória -->
-    <div class="modal" id="victoryModal">
-        <div class="modal-content">
-            <p class="modal-text">sabia que você faria a escolha certa 💖✨</p>
-        </div>
+    <div class="container certificate-card" id="certificateContainer">
+        <div class="cert-title">Certificado Oficial</div>
+        <div>Concedido a:</div>
+        <div class="cert-name">André</div>
+        <div class="cert-msg">eleito o melhor pai do ano pelo vigesimo segundo ano consecutivo!! 🎉🏆✨</div>
     </div>
 
     <script>
-        // Criar corações flutuantes no fundo
-        const bgContainer = id('bgHearts');
-        const heartIcons = ['💖', '💕', '💗', '🌸', '✨'];
-        
-        for (let i = 0; i < 20; i++) {
-            const heart = document.createElement('div');
-            heart.className = 'bg-heart';
-            heart.innerText = heartIcons[Math.floor(Math.random() * heartIcons.length)];
-            heart.style.left = Math.random() * 100 + 'vw';
-            heart.style.animationDuration = (Math.random() * 4 + 4) + 's';
-            heart.style.animationDelay = (Math.random() * 5) + 's';
-            bgContainer.appendChild(heart);
+        const questions = [
+            {
+                title: "quem é o fiscal oficial de sapatos no corredor?",
+                options: ["André (com certeza)", "O pai", "Você mesmo", "Todas as alternativas acima"]
+            },
+            {
+                title: "quem é o maior apoiador de vilanias?",
+                options: ["O melhor pai do mundo", "André", "O mestre dos planos", "Com certeza o André"]
+            },
+            {
+                title: "quem é o maior hater do matty healy?",
+                options: ["André", "O próprio André", "Definitivamente o André", "Pai do ano & Hater nº 1 do Matty Healy"]
+            }
+        ];
+
+        let currentQuestion = 0;
+
+        function renderQuestion() {
+            const q = questions[currentQuestion];
+            document.getElementById('questionTitle').innerText = q.title;
+            
+            const grid = document.getElementById('optionsGrid');
+            grid.innerHTML = '';
+
+            // Atualiza a barra de progresso
+            const progressPercent = ((currentQuestion + 1) / questions.length) * 100;
+            document.getElementById('progressBar').style.width = `${progressPercent}%`;
+
+            q.options.forEach(optionText => {
+                const btn = document.createElement('button');
+                btn.className = 'btn-option';
+                btn.innerText = optionText;
+                btn.onclick = nextQuestion;
+                grid.appendChild(btn);
+            });
         }
 
-        function id(name) {
-            return document.getElementById(name);
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                renderQuestion();
+            } else {
+                showCertificate();
+            }
         }
 
-        const btnAndre = id('btnAndre');
-        const container = id('btnContainer');
+        function showCertificate() {
+            document.getElementById('quizContainer').style.display = 'none';
+            const cert = document.getElementById('certificateContainer');
+            cert.style.display = 'block';
 
-        // Posição inicial do botão André
-        function setInitialPosition() {
-            btnAndre.style.position = 'relative';
-            btnAndre.style.left = '0px';
-            btnAndre.style.top = '0px';
-        }
-        setInitialPosition();
-
-        // Função para mover o botão do André para fugir
-        function dodgeButton() {
-            const containerRect = container.getBoundingClientRect();
-            const btnRect = btnAndre.getBoundingClientRect();
-
-            // Mudar para absoluto na primeira esquiva
-            btnAndre.style.position = 'fixed';
-
-            // Calcular limites da tela com margem de segurança
-            const padding = 20;
-            const maxX = window.innerWidth - btnRect.width - padding;
-            const maxY = window.innerHeight - btnRect.height - padding;
-
-            const randomX = Math.max(padding, Math.floor(Math.random() * maxX));
-            const randomY = Math.max(padding, Math.floor(Math.random() * maxY));
-
-            btnAndre.style.left = `${randomX}px`;
-            btnAndre.style.top = `${randomY}px`;
-        }
-
-        // Eventos para fugir no Computador e no Celular
-        btnAndre.addEventListener('mouseenter', dodgeButton);
-        btnAndre.addEventListener('touchstart', function(e) {
-            e.preventDefault();
-            dodgeButton();
-        });
-        btnAndre.addEventListener('click', dodgeButton);
-
-        // Função de comemoração quando clica na Alice
-        function celebrate() {
-            const modal = id('victoryModal');
-            modal.classList.add('active');
-
-            // Criar chuva de confetes/corações
-            const particles = ['💖', '💕', '✨', '🌸', '🎉', '💗', '⭐'];
-            for (let i = 0; i < 70; i++) {
+            // Efeito de Chuva de Confetes
+            const confetti = ['🎉', '🏆', '⭐', '✨', '👑', '🥇', '💙'];
+            for (let i = 0; i < 80; i++) {
                 setTimeout(() => {
                     const p = document.createElement('div');
                     p.className = 'particle';
-                    p.innerText = particles[Math.floor(Math.random() * particles.length)];
+                    p.innerText = confetti[Math.floor(Math.random() * confetti.length)];
                     p.style.left = Math.random() * 100 + 'vw';
-                    p.style.fontSize = (Math.random() * 20 + 18) + 'px';
+                    p.style.fontSize = (Math.random() * 20 + 20) + 'px';
                     p.style.animationDuration = (Math.random() * 2 + 2) + 's';
                     document.body.appendChild(p);
 
                     setTimeout(() => p.remove(), 4000);
-                }, i * 40);
+                }, i * 30);
             }
         }
+
+        // Inicia o Quiz
+        renderQuestion();
     </script>
 </body>
 </html>
