@@ -3,87 +3,280 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Parabéns pelo primeiro ano de MP!</title>
+    <title>Para o André 💖</title>
     <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
-            background-color: #ffe6f0;
-            font-family: 'Arial', sans-serif;
-            text-align: center;
-            padding-top: 50px;
-            color: #d63384;
-        }
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-        /* Estilização do Bolinho e da Vela */
-        .cake-container {
+            background: linear-gradient(135deg, #ffe6f0 0%, #ffccd5 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
             position: relative;
-            display: inline-block;
-            margin-top: 40px;
         }
-        .candle {
-            width: 12px;
-            height: 50px;
-            background-color: #ffc107;
+
+        /* Corações de fundo caindo devagar */
+        .bg-heart {
             position: absolute;
-            top: -50px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-radius: 4px;
+            color: rgba(255, 105, 180, 0.25);
+            font-size: 20px;
+            user-select: none;
+            pointer-events: none;
+            animation: floatUp linear infinite;
         }
-        .flame {
-            width: 20px;
-            height: 30px;
-            background: orange;
-            border-radius: 50% 50% 20% 20%;
+
+        @keyframes floatUp {
+            0% {
+                transform: translateY(105vh) scale(0.8) rotate(0deg);
+                opacity: 0;
+            }
+            20% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(-10vh) scale(1.2) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Cartão principal */
+        .card {
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(10px);
+            border-radius: 24px;
+            padding: 40px 30px;
+            box-shadow: 0 15px 35px rgba(214, 51, 132, 0.15),
+                        0 5px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            max-width: 460px;
+            width: 90%;
+            position: relative;
+            z-index: 10;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .question {
+            color: #d63384;
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1.4;
+            margin-bottom: 35px;
+        }
+
+        /* Container de botões */
+        .btn-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            min-height: 80px;
+            position: relative;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .btn-alice {
+            background: linear-gradient(135deg, #ff4081 0%, #e91e63 100%);
+            color: white;
+            z-index: 20;
+        }
+
+        .btn-alice:hover {
+            transform: scale(1.08);
+            box-shadow: 0 6px 20px rgba(233, 30, 99, 0.4);
+        }
+
+        .btn-andre {
+            background: #e0e0e0;
+            color: #555;
             position: absolute;
-            top: -30px;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: flicker 0.6s infinite alternate;
+            transition: all 0.15s ease-out;
+            z-index: 25;
+            white-space: nowrap;
         }
-        @keyframes flicker {
-            0% { transform: translateX(-50%) scale(1); opacity: 0.9; }
-            100% { transform: translateX(-50%) scale(1.1); opacity: 1; background: gold; }
+
+        /* Modal da Vitória */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(5px);
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
-        .frosting {
-            width: 220px;
-            height: 60px;
-            background-color: #ff99bb;
-            border-radius: 110px 110px 20px 20px;
-            margin: 0 auto;
+
+        .modal.active {
+            display: flex;
+            opacity: 1;
         }
-        .cake-body {
-            width: 200px;
-            height: 120px;
-            background-color: #8B4513;
-            border-radius: 0 0 20px 20px;
-            margin: 0 auto;
+
+        .modal-content {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 24px;
+            text-align: center;
+            max-width: 400px;
+            width: 85%;
+            transform: scale(0.8);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            border: 3px solid #ff4081;
         }
-        .plate {
-            width: 280px;
-            height: 20px;
-            background-color: #fff;
-            border-radius: 10px;
-            margin: 0 auto;
-            box-shadow: 0px 5px 15px rgba(0,0,0,0.1);
+
+        .modal.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-text {
+            color: #d63384;
+            font-size: 1.5rem;
+            font-weight: 700;
+            line-height: 1.4;
+        }
+
+        /* Efeitos da Chuva de Confetes/Corações */
+        .particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 150;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(-5vh) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(105vh) rotate(720deg);
+                opacity: 0;
+            }
         }
     </style>
 </head>
 <body>
 
-    <h1>Parabéns pelo primeiro ano de MP! 💖</h1>
+    <!-- Corações de fundo -->
+    <div id="bgHearts"></div>
 
-
-    <div class="cake-container">
-        <div class="candle">
-            <div class="flame"></div>
+    <div class="card">
+        <h1 class="question">quem é a pessoa que mais ama, é mais carinhosa, mais engraçada e que está sempre certa?</h1>
+        
+        <div class="btn-container" id="btnContainer">
+            <button class="btn btn-alice" onclick="celebrate()">Alice</button>
+            <button class="btn btn-andre" id="btnAndre">André</button>
         </div>
-        <div class="frosting"></div>
-        <div class="cake-body"></div>
-        <div class="plate"></div>
     </div>
 
+    <!-- Tela Final / Modal de Vitória -->
+    <div class="modal" id="victoryModal">
+        <div class="modal-content">
+            <p class="modal-text">sabia que você faria a escolha certa 💖✨</p>
+        </div>
+    </div>
+
+    <script>
+        // Criar corações flutuantes no fundo
+        const bgContainer = id('bgHearts');
+        const heartIcons = ['💖', '💕', '💗', '🌸', '✨'];
+        
+        for (let i = 0; i < 20; i++) {
+            const heart = document.createElement('div');
+            heart.className = 'bg-heart';
+            heart.innerText = heartIcons[Math.floor(Math.random() * heartIcons.length)];
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = (Math.random() * 4 + 4) + 's';
+            heart.style.animationDelay = (Math.random() * 5) + 's';
+            bgContainer.appendChild(heart);
+        }
+
+        function id(name) {
+            return document.getElementById(name);
+        }
+
+        const btnAndre = id('btnAndre');
+        const container = id('btnContainer');
+
+        // Posição inicial do botão André
+        function setInitialPosition() {
+            btnAndre.style.position = 'relative';
+            btnAndre.style.left = '0px';
+            btnAndre.style.top = '0px';
+        }
+        setInitialPosition();
+
+        // Função para mover o botão do André para fugir
+        function dodgeButton() {
+            const containerRect = container.getBoundingClientRect();
+            const btnRect = btnAndre.getBoundingClientRect();
+
+            // Mudar para absoluto na primeira esquiva
+            btnAndre.style.position = 'fixed';
+
+            // Calcular limites da tela com margem de segurança
+            const padding = 20;
+            const maxX = window.innerWidth - btnRect.width - padding;
+            const maxY = window.innerHeight - btnRect.height - padding;
+
+            const randomX = Math.max(padding, Math.floor(Math.random() * maxX));
+            const randomY = Math.max(padding, Math.floor(Math.random() * maxY));
+
+            btnAndre.style.left = `${randomX}px`;
+            btnAndre.style.top = `${randomY}px`;
+        }
+
+        // Eventos para fugir no Computador e no Celular
+        btnAndre.addEventListener('mouseenter', dodgeButton);
+        btnAndre.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            dodgeButton();
+        });
+        btnAndre.addEventListener('click', dodgeButton);
+
+        // Função de comemoração quando clica na Alice
+        function celebrate() {
+            const modal = id('victoryModal');
+            modal.classList.add('active');
+
+            // Criar chuva de confetes/corações
+            const particles = ['💖', '💕', '✨', '🌸', '🎉', '💗', '⭐'];
+            for (let i = 0; i < 70; i++) {
+                setTimeout(() => {
+                    const p = document.createElement('div');
+                    p.className = 'particle';
+                    p.innerText = particles[Math.floor(Math.random() * particles.length)];
+                    p.style.left = Math.random() * 100 + 'vw';
+                    p.style.fontSize = (Math.random() * 20 + 18) + 'px';
+                    p.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    document.body.appendChild(p);
+
+                    setTimeout(() => p.remove(), 4000);
+                }, i * 40);
+            }
+        }
+    </script>
 </body>
 </html>
